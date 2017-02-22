@@ -12,6 +12,10 @@ echo "export PATH=\$ORACLE_HOME/bin:\$PATH" >> /etc/profile.d/oracle-xe.sh
 echo "export ORACLE_SID=XE" >> /etc/profile.d/oracle-xe.sh
 . /etc/profile
 
+# Start SSH Server
+/usr/sbin/sshd -D
+echo "SSH server started. ;)"
+
 case "$1" in
 	'')
 		#Check for mounted database files
@@ -47,8 +51,7 @@ case "$1" in
 
 			echo "Database initialized. Please visit http://#containeer:8080/apex to proceed with configuration"
 		fi
-		/usr/sbin/sshd -D
-		echo "SSH server started. ;)"
+		
 		/etc/init.d/oracle-xe start
 		echo "Database ready to use. Enjoy! ;)"
 
