@@ -15,6 +15,8 @@ WORKDIR /
 RUN usermod -a -G sudo oracle
 RUN echo 'oracle:welcome1' | chpasswd
 
-EXPOSE 22
+EXPOSE 22 1521 8080
 
-CMD ["/usr/sbin/sshd", "-D"]
+ADD entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
+CMD [""]
