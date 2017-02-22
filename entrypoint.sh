@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Start SSH Server
+nohup /usr/sbin/sshd -D &> /nohup_ssh.out &
+echo "SSH server started. ;)"
+
 # Prevent owner issues on mounted folders
 chown -R oracle:dba /u01/app/oracle
 rm -f /u01/app/oracle/product
@@ -11,10 +15,6 @@ echo "export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe" > /etc/profile.d/ora
 echo "export PATH=\$ORACLE_HOME/bin:\$PATH" >> /etc/profile.d/oracle-xe.sh
 echo "export ORACLE_SID=XE" >> /etc/profile.d/oracle-xe.sh
 . /etc/profile
-
-# Start SSH Server
-/usr/sbin/sshd -D
-echo "SSH server started. ;)"
 
 case "$1" in
 	'')
